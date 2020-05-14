@@ -9,10 +9,9 @@ import {
 const HowThisWorks = ({ isOpen, setIsOpen } : any) => {
   return (
     <Modal onClose={() => setIsOpen(false)} isOpen={isOpen}>
-      <ModalHeader>Hello world</ModalHeader>
+      <ModalHeader>How this works</ModalHeader>
       <ModalBody>
-        Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-        faucibus ex, non facilisis nisl. Maecenas aliquet mauris ut tempus.
+        This webpage is based on this NPR article. Tests per day information is coming from Harvard, and the amount of tests being performed each day is coming from this API. I am not a medical professional.
       </ModalBody>
     </Modal>
   );

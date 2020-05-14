@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { caseData } from "./case-data.js";
-import { Display1, Display3, Paragraph1, HeadingLarge } from "baseui/typography";
+import {
+  Display1,
+  Display3,
+  Paragraph1,
+  HeadingLarge,
+} from "baseui/typography";
 import { Select } from "baseui/select";
-import { Block } from "baseui/block";
+import { Card } from "baseui/card";
 import { StyledLink as Link, StyledLink } from "baseui/link";
 import { useStyletron } from "styletron-react";
 import HowThisWorks from "./how-this-works";
@@ -43,38 +48,51 @@ const State = () => {
   );
   const history = useHistory();
 
-  const selected = caseData.filter((caseDatum) => caseDatum.postalCode === postalCode);
+  const selected = caseData.filter(
+    (caseDatum) => caseDatum.postalCode === postalCode
+  );
   useEffect(() => {
     fetch("https://covidtracking.com/api/v1/states/daily.json")
       .then((res) => res.json())
       .then((json) => setStatesData(json));
-  },[]);
+  }, []);
 
   return (
     <>
       <HowThisWorks {...{ isOpen, setIsOpen }} />
       <HeadingLarge>
-        Is {selected[0].stateName} doing enough COVID testing?
-        </HeadingLarge>
-      <Select
-        clearable={false}
-        searchable={false}
-        options={caseData}
-        value={selected}
-        onChange={({ option }) => {
-          if (!!option) {
-            history.push(`/${option.postalCode}`);
-          }
-        }}
-        labelKey="stateName"
-        valueKey="postalCode"
-      />
+        <div
+          className={css({
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          })}
+        >
+          <span>Is</span>&nbsp;
+          <Select
+            size="compact"
+            overrides={{ Root: { style: { width: "200px" } } }}
+            clearable={false}
+            searchable={false}
+            options={caseData}
+            value={selected}
+            onChange={({ option }) => {
+              if (!!option) {
+                history.push(`/${option.postalCode}`);
+              }
+            }}
+            labelKey="stateName"
+            valueKey="postalCode"
+          />&nbsp;
+          <span>doing enough COVID testing?</span>
+        </div>
+      </HeadingLarge>
       <div
         className={css({
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           height: "100%",
         })}
       >
@@ -83,11 +101,30 @@ const State = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            justifyContent: "space-between",
           })}
         >
-          <Display1>
-            {averageDailyTests > selected[0].testsNeeded ? "YES" : "NO"}
-          </Display1>
+          <Paragraph1>
+            <div
+              className={css({
+                fontSize: "40vmin",
+                height: "100%",
+                width: "100%",
+                paddingBottom: "10vw",
+                paddingTop: "10vw",
+              })}
+            >
+              {averageDailyTests > selected[0].testsNeeded ? "YES" : "NO"}
+            </div>
+          </Paragraph1>
+          <div>
+            <Paragraph1>
+              Daily tests needed: <b>{selected[0].testsNeeded}</b>
+            </Paragraph1>
+            <Paragraph1>
+              Daily tests (avg): <b>{averageDailyTests}</b>
+            </Paragraph1>
+          </div>
         </div>
         <StyledLink>
           <span
