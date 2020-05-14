@@ -8,11 +8,6 @@ import { Client as Styletron } from "styletron-engine-atomic";
 import { LightTheme, BaseProvider } from "baseui";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
 } from "react-router-dom";
 const engine = new Styletron();
 

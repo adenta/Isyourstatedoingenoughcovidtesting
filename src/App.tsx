@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Select, Value } from "baseui/select";
-import { Display1 } from "baseui/typography";
+import { Display1, HeadingLarge } from "baseui/typography";
 import { caseData } from "./case-data.js";
 import {
   BrowserRouter as Router,
@@ -21,9 +21,14 @@ function App() {
 
   return (
     <div className="App">
+      <Block height="100%" width={['100%', '90%', '80%']}>
+      <HeadingLarge>Is my state doing enough COVID testing?</HeadingLarge>
       <Switch>
         <Route exact path="/">
           <Select
+          clearable={false}
+          searchable={false}
+          placeholder="State"
             options={caseData}
             value={selected}
             onChange={({ option, value }) => {
@@ -49,6 +54,7 @@ function App() {
           <State />
         </Route>
       </Switch>
+      </Block>
     </div>
   );
 }
