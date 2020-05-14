@@ -12,6 +12,7 @@ import { Card } from "baseui/card";
 import { StyledLink as Link, StyledLink } from "baseui/link";
 import { useStyletron } from "styletron-react";
 import HowThisWorks from "./how-this-works";
+import StatePicker from "./state-picker";
 const SEVEN_DAYS_AGO = new Date(Date.now() - 8 * 24 * 60 * 60 * 1000);
 const reducer = (accumulator: any, currentValue: any) =>
   accumulator + currentValue;
@@ -60,33 +61,7 @@ const State = () => {
   return (
     <>
       <HowThisWorks {...{ isOpen, setIsOpen }} />
-      <HeadingLarge>
-        <div
-          className={css({
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          })}
-        >
-          <span>Is</span>&nbsp;
-          <Select
-            size="compact"
-            overrides={{ Root: { style: { width: "200px" } } }}
-            clearable={false}
-            searchable={false}
-            options={caseData}
-            value={selected}
-            onChange={({ option }) => {
-              if (!!option) {
-                history.push(`/${option.postalCode}`);
-              }
-            }}
-            labelKey="stateName"
-            valueKey="postalCode"
-          />&nbsp;
-          <span>doing enough COVID testing?</span>
-        </div>
-      </HeadingLarge>
+      <StatePicker selected={selected}/>
       <div
         className={css({
           display: "flex",

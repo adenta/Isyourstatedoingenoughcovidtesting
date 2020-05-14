@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import State from "./state";
 import { Block } from "baseui/block";
+import StatePicker from "./state-picker";
 
 function App() {
   const history = useHistory();
@@ -24,24 +25,7 @@ function App() {
       <Block height="100%" width={["100%", "90%", "80%"]}>
         <Switch>
           <Route exact path="/">
-          <HeadingLarge>
-          Is my state doing enough COVID testing?
-        </HeadingLarge>
-            <Select
-              clearable={false}
-              searchable={false}
-              placeholder="State"
-              options={caseData}
-              value={selected}
-              onChange={({ option, value }) => {
-                setSelected(value);
-                if (!!option) {
-                  history.push(`/${option.postalCode}`);
-                }
-              }}
-              labelKey="stateName"
-              valueKey="postalCode"
-            />
+          <StatePicker selected={selected}/>
             <Block
               display="flex"
               flexDirection="column"
