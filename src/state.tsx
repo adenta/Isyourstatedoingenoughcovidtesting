@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { caseData } from "./case-data.js";
-import {
-  Display1,
-  Display3,
-  Paragraph1,
-  HeadingLarge,
-} from "baseui/typography";
-import { Select } from "baseui/select";
-import { Card } from "baseui/card";
-import { StyledLink as Link, StyledLink } from "baseui/link";
+import { Paragraph1 } from "baseui/typography";
+
+import { StyledLink } from "baseui/link";
 import { useStyletron } from "styletron-react";
 import HowThisWorks from "./how-this-works";
 import StatePicker from "./state-picker";
@@ -47,7 +41,6 @@ const State = () => {
       })
       .reduce(reducer, 0) / pastSevenDaysOfSelectedStatesData.length
   );
-  const history = useHistory();
 
   const selected = caseData.filter(
     (caseDatum) => caseDatum.postalCode === postalCode
@@ -61,7 +54,7 @@ const State = () => {
   return (
     <>
       <HowThisWorks {...{ isOpen, setIsOpen }} />
-      <StatePicker selected={selected}/>
+      <StatePicker selected={selected} />
       <div
         className={css({
           display: "flex",
@@ -92,7 +85,7 @@ const State = () => {
               {averageDailyTests > selected[0].testsNeeded ? "YES" : "NO"}
             </div>
           </Paragraph1>
-          <div>
+          <div className={css({display:'flex', flexDirection: 'column', alignItems: 'flex-end'})}>
             <Paragraph1>
               Daily tests needed: <b>{selected[0].testsNeeded}</b>
             </Paragraph1>

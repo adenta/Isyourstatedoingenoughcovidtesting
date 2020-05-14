@@ -1,60 +1,66 @@
 import React from "react";
-import { HeadingLarge, Paragraph1, DisplayMedium } from "baseui/typography";
-import { css } from "react-select/src/components/Control";
+import { HeadingLarge, HeadingSmall } from "baseui/typography";
 import { Select, Value } from "baseui/select";
 import { caseData } from "./case-data";
-import { useStyletron } from "baseui";
 import { useHistory } from "react-router-dom";
 import { Block } from "baseui/block";
 
 const StatePicker = ({ selected }: { selected: Value }) => {
-  const [css] = useStyletron();
   const history = useHistory();
-  return (
-    <HeadingLarge>
-      <Block
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        overrides={{
-          Block: {
-            style: ({ $theme }) => {
-              return {
-                [$theme.mediaQuery.large]: {
-                  fontSize: $theme.sizing.scale1200,
-                },
-                [$theme.mediaQuery.medium]: {
-                  fontSize: $theme.sizing.scale800,
-                },
-                [$theme.mediaQuery.small]: {
-                  fontSize: $theme.sizing.scale700,
-                },
-              };
-            },
-          },
+
+  const StateSelect = () => {
+    return (
+      <Select
+        placeholder="State"
+        overrides={{ Root: { style: { width: "auto", minWidth: "125px" } } }}
+        clearable={false}
+        searchable={false}
+        options={caseData}
+        value={selected}
+        onChange={({ option }) => {
+          if (!!option) {
+            history.push(`/${option.postalCode}`);
+          }
         }}
-      >
-        <span>Is</span>&nbsp;
-        <Select
-          placeholder="State"
-          size="compact"
-          overrides={{ Root: { style: { width: "auto", minWidth: "125px" } } }}
-          clearable={false}
-          searchable={false}
-          options={caseData}
-          value={selected}
-          onChange={({ option }) => {
-            if (!!option) {
-              history.push(`/${option.postalCode}`);
-            }
+        labelKey="stateName"
+        valueKey="postalCode"
+      />
+    );
+  };
+
+  return (
+    <>
+      <HeadingLarge>
+        <Block
+          display={["none", "none", "flex"]}
+          alignItems="flex-start"
+          justifyContent="center"
+          overrides={{
+            Block: {
+              style: ({ $theme }) => {
+                return {
+                  [$theme.mediaQuery.large]: {
+                    fontSize: $theme.sizing.scale1200,
+                  },
+                  [$theme.mediaQuery.medium]: {
+                    fontSize: $theme.sizing.scale800,
+                  },
+                };
+              },
+            },
           }}
-          labelKey="stateName"
-          valueKey="postalCode"
-        />
-        &nbsp;
-        <span>doing enough COVID testing?</span>
+        >
+          <span>Is</span>&nbsp;
+          <StateSelect />
+          &nbsp;
+          <span>doing enough COVID testing?</span>
+        </Block>
+      </HeadingLarge>
+      <Block display={["block", "block", "none"]}>
+        <HeadingSmall>Is your state doing enough covid testing?</HeadingSmall>
+        <StateSelect />
       </Block>
-    </HeadingLarge>
+    </>
   );
 };
 

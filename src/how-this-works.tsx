@@ -3,8 +3,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  ModalButton,
 } from "baseui/modal";
 const HowThisWorks = ({ isOpen, setIsOpen } : any) => {
   return (
