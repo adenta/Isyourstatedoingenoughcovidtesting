@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { caseData } from "./case-data.js";
-import { Display1, Display3, Paragraph1 } from "baseui/typography";
+import { Display1, Display3, Paragraph1, HeadingLarge } from "baseui/typography";
 import { Select } from "baseui/select";
 import { Block } from "baseui/block";
 import { StyledLink as Link, StyledLink } from "baseui/link";
@@ -13,7 +13,7 @@ const reducer = (accumulator: any, currentValue: any) =>
 
 const State = () => {
   const [css] = useStyletron();
-  const { state } = useParams();
+  const { postalCode } = useParams();
 
   const [statesData, setStatesData] = useState<any>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -25,7 +25,7 @@ const State = () => {
         4
       )}/${dateString.substring(4, 6)}/${dateString.substring(6, 8)}`;
       const date = new Date(formattedDateString);
-      return stateData.state === state && date > SEVEN_DAYS_AGO;
+      return stateData.state === postalCode && date > SEVEN_DAYS_AGO;
     }
   );
   const averageDailyTests = Math.round(
@@ -39,20 +39,23 @@ const State = () => {
           pastSevenDaysOfSelectedStatesData[index + 1].totalTestResults
         );
       })
-      .reduce(reducer, 0) / 7
+      .reduce(reducer, 0) / pastSevenDaysOfSelectedStatesData.length
   );
   const history = useHistory();
 
-  const selected = caseData.filter((caseDatum) => caseDatum.state === state);
+  const selected = caseData.filter((caseDatum) => caseDatum.postalCode === postalCode);
   useEffect(() => {
     fetch("https://covidtracking.com/api/v1/states/daily.json")
       .then((res) => res.json())
       .then((json) => setStatesData(json));
-  });
+  },[]);
 
   return (
     <>
       <HowThisWorks {...{ isOpen, setIsOpen }} />
+      <HeadingLarge>
+        Is {selected[0].stateName} doing enough COVID testing?
+        </HeadingLarge>
       <Select
         clearable={false}
         searchable={false}
@@ -60,11 +63,11 @@ const State = () => {
         value={selected}
         onChange={({ option }) => {
           if (!!option) {
-            history.push(`/${option.state}`);
+            history.push(`/${option.postalCode}`);
           }
         }}
-        labelKey="state"
-        valueKey="state"
+        labelKey="stateName"
+        valueKey="postalCode"
       />
       <div
         className={css({
@@ -82,11 +85,9 @@ const State = () => {
             alignItems: "center",
           })}
         >
-          {" "}
           <Display1>
-            {averageDailyTests < selected[0].testsNeeded ? "NO" : "YES"}
+            {averageDailyTests > selected[0].testsNeeded ? "YES" : "NO"}
           </Display1>
-          <Display3>Your state is not doing enough COVID testing</Display3>
         </div>
         <StyledLink>
           <span
