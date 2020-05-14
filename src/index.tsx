@@ -6,13 +6,22 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider as StyletronProvider } from "styletron-react";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { LightTheme, BaseProvider } from "baseui";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+} from "react-router-dom";
 const engine = new Styletron();
 
 ReactDOM.render(
   <React.StrictMode>
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
-        <App />
+        <Router>
+        <App /></Router>
       </BaseProvider>
     </StyletronProvider>
   </React.StrictMode>,
