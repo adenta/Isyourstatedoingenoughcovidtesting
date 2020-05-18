@@ -1,5 +1,6 @@
 {
   "name": "covid-testing",
+  "homepage":"https://adenta.github.io/dowehaveenoughcovidtestingcapacity",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +16,7 @@
     "@types/styletron-react": "^5.0.2",
     "@types/styletron-standard": "^2.0.0",
     "baseui": "^9.76.0",
+    "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -28,7 +30,9 @@
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

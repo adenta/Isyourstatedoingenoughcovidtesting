@@ -7,7 +7,7 @@ import { StyledLink } from "baseui/link";
 import { useStyletron } from "styletron-react";
 import HowThisWorks from "./how-this-works";
 import StatePicker from "./state-picker";
-const SEVEN_DAYS_AGO = new Date(Date.now() - 8 * 24 * 60 * 60 * 1000);
+const DATE_THRESHOLD = new Date(Date.now() - 8 * 24 * 60 * 60 * 1000);
 const reducer = (accumulator: any, currentValue: any) =>
   accumulator + currentValue;
 
@@ -25,7 +25,7 @@ const State = () => {
         4
       )}/${dateString.substring(4, 6)}/${dateString.substring(6, 8)}`;
       const date = new Date(formattedDateString);
-      return stateData.state === postalCode && date > SEVEN_DAYS_AGO;
+      return stateData.state === postalCode && date > DATE_THRESHOLD;
     }
   );
   const averageDailyTests = Math.round(
