@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/dowehaveenoughcovidtestingcapacity/static/css/main.005646dc.chunk.css",
-    "main.js": "/dowehaveenoughcovidtestingcapacity/static/js/main.ae8d3ab5.chunk.js",
-    "main.js.map": "/dowehaveenoughcovidtestingcapacity/static/js/main.ae8d3ab5.chunk.js.map",
-    "runtime-main.js": "/dowehaveenoughcovidtestingcapacity/static/js/runtime-main.3641cad7.js",
-    "runtime-main.js.map": "/dowehaveenoughcovidtestingcapacity/static/js/runtime-main.3641cad7.js.map",
-    "static/js/2.7e780301.chunk.js": "/dowehaveenoughcovidtestingcapacity/static/js/2.7e780301.chunk.js",
-    "static/js/2.7e780301.chunk.js.map": "/dowehaveenoughcovidtestingcapacity/static/js/2.7e780301.chunk.js.map",
-    "index.html": "/dowehaveenoughcovidtestingcapacity/index.html",
-    "precache-manifest.85235884e9a4a9df60a7954e66356ebf.js": "/dowehaveenoughcovidtestingcapacity/precache-manifest.85235884e9a4a9df60a7954e66356ebf.js",
-    "service-worker.js": "/dowehaveenoughcovidtestingcapacity/service-worker.js",
-    "static/css/main.005646dc.chunk.css.map": "/dowehaveenoughcovidtestingcapacity/static/css/main.005646dc.chunk.css.map",
-    "static/js/2.7e780301.chunk.js.LICENSE.txt": "/dowehaveenoughcovidtestingcapacity/static/js/2.7e780301.chunk.js.LICENSE.txt"
+    "main.css": "/isyourstatedoingenoughcovidtesting/static/css/main.005646dc.chunk.css",
+    "main.js": "/isyourstatedoingenoughcovidtesting/static/js/main.f09313c0.chunk.js",
+    "main.js.map": "/isyourstatedoingenoughcovidtesting/static/js/main.f09313c0.chunk.js.map",
+    "runtime-main.js": "/isyourstatedoingenoughcovidtesting/static/js/runtime-main.c8437463.js",
+    "runtime-main.js.map": "/isyourstatedoingenoughcovidtesting/static/js/runtime-main.c8437463.js.map",
+    "static/js/2.7e780301.chunk.js": "/isyourstatedoingenoughcovidtesting/static/js/2.7e780301.chunk.js",
+    "static/js/2.7e780301.chunk.js.map": "/isyourstatedoingenoughcovidtesting/static/js/2.7e780301.chunk.js.map",
+    "index.html": "/isyourstatedoingenoughcovidtesting/index.html",
+    "precache-manifest.90637d2f971dd8b25acda5f2229011fc.js": "/isyourstatedoingenoughcovidtesting/precache-manifest.90637d2f971dd8b25acda5f2229011fc.js",
+    "service-worker.js": "/isyourstatedoingenoughcovidtesting/service-worker.js",
+    "static/css/main.005646dc.chunk.css.map": "/isyourstatedoingenoughcovidtesting/static/css/main.005646dc.chunk.css.map",
+    "static/js/2.7e780301.chunk.js.LICENSE.txt": "/isyourstatedoingenoughcovidtesting/static/js/2.7e780301.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3641cad7.js",
+    "static/js/runtime-main.c8437463.js",
     "static/js/2.7e780301.chunk.js",
     "static/css/main.005646dc.chunk.css",
-    "static/js/main.ae8d3ab5.chunk.js"
+    "static/js/main.f09313c0.chunk.js"
   ]
 }
