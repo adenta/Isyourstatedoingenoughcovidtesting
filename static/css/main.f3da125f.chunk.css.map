@@ -1,0 +1,1 @@
+{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,KACE,WAAY,CACZ,YAAa,CACb,sBAAuB,CACvB,sBACF,CAEA,KACE,kBACF","file":"main.f3da125f.chunk.css","sourcesContent":[".App {\n  height: 70vh;\n  display: flex;\n  align-items: flex-start;\n  justify-content: center;\n}\n\nbody {\n  background: #141414\n}"]}
