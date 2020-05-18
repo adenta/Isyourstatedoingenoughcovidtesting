@@ -15,7 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <StyletronProvider value={engine}>
       <BaseProvider theme={DarkTheme}>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
         <App /></Router>
       </BaseProvider>
     </StyletronProvider>
