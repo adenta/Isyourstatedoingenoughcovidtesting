@@ -1,6 +1,6 @@
 {
   "name": "covid-testing",
-  "homepage":"https://denta.co/isyourstatedoingenoughcovidtesting",
+  "homepage":"https://adenta.github.io/isyourstatedoingenoughcovidtesting",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
