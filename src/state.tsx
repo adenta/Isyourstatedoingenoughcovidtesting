@@ -17,7 +17,7 @@ const State = () => {
   const [statesData, setStatesData] = useState<any>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const filteredData = filterData(caseData, postalCode);
+  const filteredData = filterData(statesData, postalCode);
   const averageDailyTests = averageData(filteredData);
 
   const selectedValue: Value = caseData.filter(

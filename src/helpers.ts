@@ -1,16 +1,18 @@
 const DATE_THRESHOLD = new Date(Date.now() - 8 * 24 * 60 * 60 * 1000);
 const sum = (accumulator: any, currentValue: any) => accumulator + currentValue;
 
-const filterData = (data: any[], postalCode: string) => {
-  return data.filter((stateData: { state: any; date: number }) => {
-    const dateString = stateData.date.toString();
-    const formattedDateString = `${dateString.substring(
-      0,
-      4
-    )}/${dateString.substring(4, 6)}/${dateString.substring(6, 8)}`;
-    const date = new Date(formattedDateString);
-    return stateData.state === postalCode && date > DATE_THRESHOLD;
-  });
+const filterData = (statesData: any, postalCode: string) => {
+  return statesData.filter(
+    (stateData: { date: { toString: () => any }; state: string }) => {
+      const dateString = stateData.date.toString();
+      const formattedDateString = `${dateString.substring(
+        0,
+        4
+      )}/${dateString.substring(4, 6)}/${dateString.substring(6, 8)}`;
+      const date = new Date(formattedDateString);
+      return stateData.state === postalCode && date > DATE_THRESHOLD;
+    }
+  );
 };
 
 const averageData = (data: { totalTestResults: any }[]) => {
