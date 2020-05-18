@@ -50,6 +50,7 @@ const StatePicker = ({ selected }: { selected: Value }) => {
             },
           }}
         >
+          {/* Using html entities, becaue {" "} didn't work for some reason? */}
           <span>Is</span>&nbsp;
           <StateSelect />
           &nbsp;
@@ -57,7 +58,7 @@ const StatePicker = ({ selected }: { selected: Value }) => {
         </Block>
       </HeadingLarge>
       <Block display={["block", "block", "none"]}>
-        <HeadingSmall>Is your state doing enough covid testing?</HeadingSmall>
+        <HeadingSmall>Is your state doing enough COVID testing?</HeadingSmall>
         <StateSelect />
       </Block>
     </>

@@ -7,9 +7,8 @@ import { StyledLink } from "baseui/link";
 import { useStyletron } from "styletron-react";
 import HowThisWorks from "./how-this-works";
 import StatePicker from "./state-picker";
-const DATE_THRESHOLD = new Date(Date.now() - 8 * 24 * 60 * 60 * 1000);
-const reducer = (accumulator: any, currentValue: any) =>
-  accumulator + currentValue;
+import { filterData, averageData } from "./helpers";
+import { Value } from "baseui/select";
 
 const State = () => {
   const [css] = useStyletron();
@@ -17,34 +16,15 @@ const State = () => {
 
   const [statesData, setStatesData] = useState<any>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const pastSevenDaysOfSelectedStatesData = statesData.filter(
-    (stateData: { state: any; date: number }) => {
-      const dateString = stateData.date.toString();
-      const formattedDateString = `${dateString.substring(
-        0,
-        4
-      )}/${dateString.substring(4, 6)}/${dateString.substring(6, 8)}`;
-      const date = new Date(formattedDateString);
-      return stateData.state === postalCode && date > DATE_THRESHOLD;
-    }
-  );
-  const averageDailyTests = Math.round(
-    pastSevenDaysOfSelectedStatesData
-      .map((stateData: { totalTestResults: any }, index: number) => {
-        if (index === pastSevenDaysOfSelectedStatesData.length - 1) {
-          return 0;
-        }
-        return (
-          stateData.totalTestResults -
-          pastSevenDaysOfSelectedStatesData[index + 1].totalTestResults
-        );
-      })
-      .reduce(reducer, 0) / pastSevenDaysOfSelectedStatesData.length
-  );
 
-  const selected = caseData.filter(
+  const filteredData = filterData(caseData, postalCode);
+  const averageDailyTests = averageData(filteredData);
+
+  const selectedValue: Value = caseData.filter(
     (caseDatum) => caseDatum.postalCode === postalCode
   );
+
+  const selected = selectedValue[0];
   useEffect(() => {
     fetch("https://covidtracking.com/api/v1/states/daily.json")
       .then((res) => res.json())
@@ -54,7 +34,7 @@ const State = () => {
   return (
     <>
       <HowThisWorks {...{ isOpen, setIsOpen }} />
-      <StatePicker selected={selected} />
+      <StatePicker selected={selectedValue} />
       <div
         className={css({
           display: "flex",
@@ -82,12 +62,18 @@ const State = () => {
                 paddingTop: "10vw",
               })}
             >
-              {averageDailyTests > selected[0].testsNeeded ? "YES" : "NO"}
+              {averageDailyTests > selected.testsNeeded ? "YES" : "NO"}
             </div>
           </Paragraph1>
-          <div className={css({display:'flex', flexDirection: 'column', alignItems: 'flex-end'})}>
+          <div
+            className={css({
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+            })}
+          >
             <Paragraph1>
-              Daily tests needed: <b>{selected[0].testsNeeded}</b>
+              Daily tests needed: <b>{selected.testsNeeded}</b>
             </Paragraph1>
             <Paragraph1>
               Daily tests (avg): <b>{averageDailyTests}</b>
